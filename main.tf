@@ -1,16 +1,1 @@
-# main.tf
-provider "aws" {
-  region = "us-east-1"
-}
-
-# VULNERABLE BUCKET: Missing compliance policies
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "regradar-patient-data-bucket"
-}
-
-resource "aws_s3_bucket_ownership_controls" "example" {
-  bucket = aws_s3_bucket.my_bucket.id
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
-}
+{"name": "syntax_validator", "arguments": {"code":"{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AddPerm\",\n      \"Effect\": \"Allow\",\n      \"Principal\": \"*\",\n      \"Action\": \"s3:GetObject\",\n      \"Resource\": \"arn:aws:s3:::my-s3-bucket/*\"\n    }\n  ]\n}"}}
